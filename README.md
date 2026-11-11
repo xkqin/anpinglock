@@ -1,118 +1,138 @@
-# AwayLock · 离身锁
+# 离身锁 AwayLock
 
-[简体中文](README.zh-CN.md) · [Download for Windows](https://github.com/xkqin/awaylock/releases/latest) · [Report an issue](https://github.com/xkqin/awaylock/issues)
+## 离开工位，才想起电脑忘了锁屏？
 
-AwayLock locks your Windows session after your selected phone has stayed disconnected from Bluetooth for 60 seconds and your PC has received no keyboard or mouse input for 60 seconds. Input restarts confirmation; unavailable Bluetooth or idle information pauses locking. Start protection once, then close the window or exit its tray menu. A separate background agent continues working.
+**倒杯水、拿个快递、临时去开个会——人已经走了，电脑却还停在桌面。**
 
-![AwayLock interface](docs/assets/interface.en.png)
+离身锁，帮你省去忘记锁屏的烦恼。带上手机离开，蓝牙持续断开且电脑连续空闲满 60 秒后，程序会自动锁屏；你还在操作键鼠时，它会暂缓锁屏。
 
-## Install
+[![点击下载 Windows 安装包 · v1.0.2](docs/assets/download-windows.zh-CN.svg)](https://github.com/xkqin/awaylock/releases/download/v1.0.2/AwayLock-Setup-1.0.2-win-x64.exe)
 
-1. Download `AwayLock-Setup-1.0.2-win-x64.exe` from Releases.
-2. Run the installer. It installs for your Windows account and includes the .NET runtime.
-3. Pair your phone in Windows Bluetooth settings.
-4. Open AwayLock, select the paired phone, and choose **Enable phone-away lock**.
-5. Wait for **Phone connected. Auto-lock armed.** before testing it.
+**点上方蓝色按钮，下载 `AwayLock-Setup-1.0.2-win-x64.exe`。不用下载源码，也不用自己编译。**
 
-[Download v1.0.2](https://github.com/xkqin/awaylock/releases/download/v1.0.2/AwayLock-Setup-1.0.2-win-x64.exe)
+Windows 10 / 11 · x64 · v1.0.2 · 安装包约 69 MiB
 
-Windows 10 version 2004 or later and Windows 11, x64. This release has an unsigned installer. Release assets include SHA-256 checksums.
+![真实办公场景：人离开了，电脑还留在工位上](docs/assets/office-workstation.jpg)
 
-## Low-resource background
+<sub>实景摄影：[Mikhail Nilov / Pexels](https://www.pexels.com/photo/a-computer-on-an-office-desk-8297861/)。场景配图，非程序运行效果；[图片来源](docs/assets/PHOTO_CREDITS.md)。</sub>
 
-Closing the interface leaves one native agent. On the development computer, it used approximately **14 MiB resident memory** and **2.1–2.4 MiB private memory**, including a Bluetooth-query probe. In 60-second locked-idle samples, it consumed 0–15.625 ms of CPU time and wrote 686 bytes of heartbeat payload. Stable heartbeats run every 30 seconds; connection, session and settings events wake the agent when needed. These are measured examples, not hard limits, and an open WPF dashboard uses additional memory. [Validation and measurement conditions](docs/validation.md).
+[English](README.en.md) · [下载 Windows 安装包](https://github.com/xkqin/awaylock/releases/latest) · [反馈问题](https://github.com/xkqin/awaylock/issues)
 
-## What happens when I exit?
+启用一次，关闭窗口或退出托盘后，后台仍会继续保护。
 
-| Action | Result |
+## 程序实际长什么样？
+
+选择已配对的手机，点击 **启用离身锁屏**。首次连接成功后，保护才会就绪。
+
+![离身锁 v1.0.2 实际界面](docs/assets/interface.zh-CN.png)
+
+*v1.0.2 实际程序界面，点击图片可查看大图。*
+
+## 去哪里下载？怎么安装？
+
+### [⬇ 点击这里直接下载安装包（Windows .exe）](https://github.com/xkqin/awaylock/releases/download/v1.0.2/AwayLock-Setup-1.0.2-win-x64.exe)
+
+也可以进入 **[GitHub Releases 发布页](https://github.com/xkqin/awaylock/releases/latest)**，展开页面下方的 **Assets（附件）**，选择 **AwayLock-Setup-1.0.2-win-x64.exe**。
+
+**不要误下 Source code (zip) 或 Source code (tar.gz)，它们是开发者用的源码。**
+
+### 安装后这样使用
+
+1. 下载 `AwayLock-Setup-1.0.2-win-x64.exe`，双击安装。安装包自带所需运行环境。
+2. 在 Windows 蓝牙设置中完成手机配对。
+3. 打开 AwayLock，选择这部手机，点击“启用离身锁屏”。
+4. 等待界面显示“手机已连接，离身锁屏已就绪”。
+5. 携带手机离开，待 Windows 报告蓝牙断开并完成 60 秒确认、且电脑连续空闲满 60 秒后，电脑会锁屏。
+
+[下载 v1.0.2 安装包](https://github.com/xkqin/awaylock/releases/download/v1.0.2/AwayLock-Setup-1.0.2-win-x64.exe)
+
+支持 Windows 10 2004 及以上版本、Windows 11，x64 架构。安装在当前用户目录，附带所需的 .NET 运行时。当前安装包未做代码签名，发布页同时提供 SHA-256 校验值。
+
+## 低占用后台
+
+退出界面后只保留一个原生后台进程。本机实测常驻内存约 **14 MiB**、私有内存约 **2.1～2.4 MiB**，蓝牙查询检查也在此范围。一分钟锁屏待机采样消耗 0～15.625 毫秒 CPU 时间、写入 686 字节心跳数据。稳定时每 30 秒更新心跳，连接、会话和设置事件按需唤醒后台。以上是特定测试条件下的实测值；打开 WPF 界面会增加临时占用。[验证记录与测量条件](docs/validation.md)。
+
+## 退出以后还有效吗
+
+| 操作 | 后台保护 |
 | --- | --- |
-| Minimize | The interface moves to the tray. Protection continues. |
-| Close the window | The interface exits. Protection continues. |
-| Choose **Exit interface** in the tray | The interface and tray icon exit. Protection continues. |
-| Choose **Stop protection** | The saved enable flag is cleared, the background task is stopped and removed. |
-| Sign in or unlock Windows | Enabled protection is restored automatically. |
-| Background agent ends unexpectedly | Windows Task Scheduler starts it again, normally within about a minute. |
-| Uninstall | The background task and current application settings are removed. |
+| 最小化 | 界面收起到托盘，保护继续。 |
+| 关闭窗口 | 界面退出，保护继续。 |
+| 托盘选择“退出界面” | 界面和托盘图标退出，保护继续。 |
+| 点击“停止保护” | 保存停用状态，并停止、移除后台任务。 |
+| 登录或解锁 Windows | 自动恢复已经启用的保护。 |
+| 守护进程意外结束 | 由 Windows 计划任务恢复，通常在约一分钟内。 |
+| 卸载 | 清除后台任务和当前应用设置。 |
 
-Open AwayLock again to check the state, change the phone, or stop protection.
+需要查看状态、换手机或停止保护时，重新打开 AwayLock。
 
-## How it works
+## 工作原理
 
-AwayLock has two processes. `AwayLock.exe` is the on-demand .NET/WPF interface. `AwayLock.Agent.exe` is a small native C++ process owning the Bluetooth device, absence timer, and Windows lock request. Closing the interface releases its runtime and leaves only the native agent, which does not load a CLR or forms runtime.
+程序分为两个进程。
 
-```mermaid
-flowchart LR
-    UI[Select phone and start protection] --> Settings[Local saved settings]
-    Settings --> Task[Per-user scheduled task]
-    Task --> Agent[Background agent]
-    Agent --> Phone[Windows Bluetooth state]
-    Phone -->|Connected once| Armed[Auto-lock armed]
-    Armed -->|Disconnected and idle for 60 seconds| Lock[LockWorkStation]
-    Armed -->|Keyboard/mouse input or unknown state| Confirm[Restart confirmation]
-    Confirm --> Armed
-    Armed -->|Reconnected during countdown| Armed
-```
+- `AwayLock.exe` 提供界面、手机选择和开始/停止控制。
+- `AwayLock.Agent.exe` 是原生 C++ 小进程，在后台持有蓝牙对象，检查连接状态，维护离开计时，并向 Windows 发出锁屏请求；常驻后台不加载 .NET 或窗体运行时。
 
-The agent responds to `ConnectionStatusChanged` events. Stable connections otherwise wake every 30 seconds; absence checks run every five seconds. When disconnected and unlocked, it requests uncached RFCOMM service discovery at most once per minute. Service discovery pauses while Windows is locked. It retains the device and discovered service objects between checks. The phone and Windows Bluetooth stack determine which connections and profiles remain active.
+界面退出时，守护进程继续运行。它通过当前用户的 Windows 计划任务启动，包含登录、解锁、失败恢复和每分钟一次的看门狗触发器。互斥锁限制同一用户同时运行一个守护进程。
 
-An observed connection arms protection. A subsequent confirmed disconnection starts a 60-second confirmation period. Reconnecting clears that timer. Keyboard or mouse input restarts confirmation, and the PC must remain idle for 60 seconds. A query timeout, error, unpaired device or unavailable idle reading clears the countdown instead of counting as absence. Fresh connection and idle observations are checked again immediately before the Windows `LockWorkStation` request. Windows Hello, PIN, or password provides sign-in afterward.
+### 蓝牙检测
 
-After a Windows unlock, AwayLock waits for a fresh phone connection before arming again. Agent crash recovery can restore an armed countdown from a recent heartbeat belonging to the same Windows logon session. A monotonic clock tracks the active countdown.
+通过 Windows 的 `ConnectionStatusChanged` 事件响应连接变化；稳定连接时每 30 秒检查，断开确认时每 5 秒检查。当手机处于断开状态时，最多每分钟请求一次未缓存的 RFCOMM 服务发现，并在两次检查之间保留设备和服务对象。锁屏期间暂停服务发现。手机和 Windows 蓝牙栈决定实际建立和维持的蓝牙连接。
 
-The scheduled task runs in the current user's interactive session. It has sign-in and unlock triggers, failure recovery, and a one-minute repeating watchdog. A per-user mutex keeps one agent instance active. **Stop protection** saves the disabled state before removing that task, and the lock path checks the saved state again before requesting a lock.
+### 离开确认
 
-See the source files in [the implementation guide](docs/architecture.md).
+手机至少成功连接一次后，当前会话才进入保护状态。随后持续断开 60 秒、且电脑连续空闲满 60 秒，程序才会通过 `LockWorkStation` 锁定 Windows。键鼠操作会重新进行离开确认，手机重连会清零计时。查询超时、错误、取消配对或无法读取空闲时间均不作为确认离开的证据；恢复后重新确认。锁屏请求前再次检查连接和空闲时间。
 
-## Bluetooth and Windows Dynamic Lock
+手机就在旁边时，Windows 也可能因手机省电或蓝牙连接策略报告断开。“正在使用电脑，已暂缓锁屏”表示检测到了键鼠操作；蓝牙连接状态不等同于手机的实际距离。
 
-Bluetooth disconnection is the presence signal. Its range and timing depend on the phone, adapter, drivers, walls, and interference. A nearby phone can also disconnect because of its power-saving or Bluetooth profile policy; connection state is not a distance measurement. Recent keyboard or mouse input postpones locking. The confirmation period starts when Windows reports the disconnection. Polling and Bluetooth requests can add latency.
+Windows 解锁后，需要再次观察到手机连接才会重新就绪。守护进程意外重启时，可以从同一 Windows 登录会话的近期心跳中恢复保护状态和剩余计时。正常运行中的倒计时使用单调时钟。
 
-Windows Dynamic Lock is a separate Windows feature available in Sign-in options. AwayLock makes its own lock request. With both enabled, Windows can also lock according to its own Dynamic Lock rules. The screenshots below show Windows' paired-phone status and Dynamic Lock settings.
+### 停止与恢复
 
-![Windows reports a connected phone](docs/assets/windows-bluetooth-connected.png)
+“开始”会保存启用状态、注册后台任务并立即启动守护进程。“停止保护”先保存停用状态，再停止并移除后台任务。发出锁屏请求前，守护进程还会复查当前保存的启用状态和选定设备。
+
+更完整的代码入口和生命周期说明见[实现说明](docs/architecture.md)。
+
+## 与 Windows 动态锁的关系
+
+AwayLock 自己根据蓝牙连接状态发出锁屏请求。Windows 登录选项中的“动态锁”也可以独立使用。两者同时启用时，Windows 还可能按自己的动态锁规则提前锁屏。
+
+下面是本项目提供的 Windows 配对手机和动态锁设置截图，设备名称已脱敏。
+
+![Windows 中已连接的手机](docs/assets/windows-bluetooth-connected.png)
 
 <details>
-<summary>Windows Dynamic Lock settings</summary>
+<summary>展开查看 Windows 动态锁设置</summary>
 
-![Windows Dynamic Lock settings supplied with the project](docs/assets/windows-dynamic-lock.png)
+![Windows 动态锁](docs/assets/windows-dynamic-lock.png)
 
 </details>
 
-Microsoft documents the APIs and Windows feature used here. [Bluetooth connection state](https://learn.microsoft.com/uwp/api/windows.devices.bluetooth.bluetoothdevice.connectionstatus) · [Uncached RFCOMM discovery](https://learn.microsoft.com/uwp/api/windows.devices.bluetooth.bluetoothdevice.getrfcommservicesasync) · [LockWorkStation](https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-lockworkstation) · [Windows Dynamic Lock](https://support.microsoft.com/windows/lock-your-windows-device-automatically-when-you-step-away-from-it-46b5c2b1-1b5d-2e02-1a2f-6fe1c612fd9d)
+蓝牙断开的距离和时间取决于手机、适配器、驱动、墙体和无线干扰。60 秒确认从 Windows 报告断开后开始计算，状态轮询和蓝牙请求也会带来额外延迟。实际使用时，请在自己的手机和电脑上测试一次离开、返回和解锁流程。
 
-## Local data
+## 本地数据
 
-Preferences are stored in `%LOCALAPPDATA%\AwayLock\settings.json`. They contain the selected Bluetooth address and display name, enable flag, and interface language. Settings are cached, with a named event for changes and a one-minute fallback read. `agent-state.json` holds the heartbeat, connection state and idle seconds, updated every 30 seconds while stable and immediately on state changes. `agent-events.jsonl` records lock requests and errors with one rotated file after 1 MiB; normal Bluetooth fluctuations do not append logs. A startup error can produce `agent-error.log`. The interface keeps its recent activity list in memory.
+设置保存于 `%LOCALAPPDATA%\AwayLock\settings.json`，包括选定手机的蓝牙地址、显示名称、保护启用状态和界面语言。后台缓存设置，通过命名事件响应变更，并每分钟复查一次。`agent-state.json` 保存心跳、连接状态和空闲秒数，稳定时每 30 秒写入，状态改变时立即更新。`agent-events.jsonl` 仅追加锁屏请求及错误，不持续记录蓝牙波动，超过 1 MiB 时轮换一次。后台启动出错时，可能生成 `agent-error.log`。界面的最近活动列表保存在进程内存中。
 
-Bluetooth queries, task registration, state files, and lock requests run locally.
+蓝牙查询、任务注册、状态记录和锁屏调用均在本机进行。
 
-## Build
+## 从源码构建
 
-On Windows, install the .NET 8 SDK, CMake, Visual Studio 2022 C++ Build Tools and a Windows SDK with C++/WinRT, then run this from the repository root.
+在 Windows 上安装 .NET 8 SDK、CMake、Visual Studio 2022 C++ 生成工具及 Windows SDK（含 C++/WinRT），在仓库根目录执行下面的命令。
 
 ```powershell
 ./scripts/build.ps1
 ```
 
-The script runs managed policy checks and native/reference parity checks, builds the native x64 agent, publishes the self-contained interface, and builds the installer. It downloads a pinned, checksum-verified Inno Setup compiler package when needed. Outputs are written under `artifacts/`. Run `./scripts/measure-agent.ps1 -Seconds 60` to measure CPU, memory and IO for an installed agent.
+脚本会运行策略检查及原生/托管策略对照、构建原生 x64 后台、发布自包含界面，并生成安装包。需要时会下载固定版本、经过校验的 Inno Setup 编译器。输出位于 `artifacts/`。可运行 `./scripts/measure-agent.ps1 -Seconds 60` 测量已安装后台的 CPU、内存和写入量。
 
 ```powershell
 dotnet run --project tests/AwayLock.PolicyTests -c Release
 ./scripts/build.ps1 -SkipInstaller
 ```
 
-Developers can export a clean interface preview from a built executable.
+## 验证与授权
 
-```powershell
-./artifacts/distribution/AwayLock.exe --render-preview interface.png --english
-```
+策略检查覆盖首次连接、持续断开阈值、中途重连、锁定/解锁、重复锁屏请求、锁屏请求失败和后台恢复。实机验证记录见[验证说明](docs/validation.md)。
 
-## Validation
-
-The policy checks cover initial arming, the 60-second threshold, reconnecting during a countdown, Windows lock/unlock, repeated requests, failed lock requests, and background recovery. Real-world walk-away behavior should be checked with the phone and adapter used on the target computer.
-
-The release validation record is kept in [docs/validation.md](docs/validation.md).
-
-## License and credits
-
-Application source is released under the [MIT license](LICENSE). The application uses the Windows Bluetooth APIs, .NET 8, and Inno Setup. The bundled installer translation retains its upstream notices. [Third-party details](THIRD_PARTY_NOTICES.md)
+应用源码使用 [MIT 开源协议](LICENSE)。项目使用 Windows 蓝牙 API、.NET 8 和 Inno Setup，第三方说明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

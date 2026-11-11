@@ -1,14 +1,44 @@
 # 离身锁 AwayLock
 
-[English](README.md) · [下载 Windows 安装包](https://github.com/xkqin/awaylock/releases/latest) · [反馈问题](https://github.com/xkqin/awaylock/issues)
+## 离开工位，才想起电脑忘了锁屏？
 
-手机与电脑蓝牙持续断开、且电脑连续 60 秒没有键鼠操作后，AwayLock 自动锁定当前 Windows 会话。键鼠操作会重置离开确认，蓝牙或空闲状态读取失败时暂停锁屏。点击一次“启用离身锁屏”，后台保护便会持续运行。关闭窗口、退出右下角托盘，守护进程都会继续工作。
+**倒杯水、拿个快递、临时去开个会——人已经走了，电脑却还停在桌面。**
 
-![离身锁界面](docs/assets/interface.zh-CN.png)
+离身锁，帮你省去忘记锁屏的烦恼。带上手机离开，蓝牙持续断开且电脑连续空闲满 60 秒后，程序会自动锁屏；你还在操作键鼠时，它会暂缓锁屏。
 
-## 安装使用
+[![点击下载 Windows 安装包 · v1.0.2](docs/assets/download-windows.zh-CN.svg)](https://github.com/xkqin/awaylock/releases/download/v1.0.2/AwayLock-Setup-1.0.2-win-x64.exe)
 
-1. 在 Releases 下载 `AwayLock-Setup-1.0.2-win-x64.exe`，双击安装。
+**点上方蓝色按钮，下载 `AwayLock-Setup-1.0.2-win-x64.exe`。不用下载源码，也不用自己编译。**
+
+Windows 10 / 11 · x64 · v1.0.2 · 安装包约 69 MiB
+
+![真实办公场景：人离开了，电脑还留在工位上](docs/assets/office-workstation.jpg)
+
+<sub>实景摄影：[Mikhail Nilov / Pexels](https://www.pexels.com/photo/a-computer-on-an-office-desk-8297861/)。场景配图，非程序运行效果；[图片来源](docs/assets/PHOTO_CREDITS.md)。</sub>
+
+[English](README.en.md) · [下载 Windows 安装包](https://github.com/xkqin/awaylock/releases/latest) · [反馈问题](https://github.com/xkqin/awaylock/issues)
+
+启用一次，关闭窗口或退出托盘后，后台仍会继续保护。
+
+## 程序实际长什么样？
+
+选择已配对的手机，点击 **启用离身锁屏**。首次连接成功后，保护才会就绪。
+
+![离身锁 v1.0.2 实际界面](docs/assets/interface.zh-CN.png)
+
+*v1.0.2 实际程序界面，点击图片可查看大图。*
+
+## 去哪里下载？怎么安装？
+
+### [⬇ 点击这里直接下载安装包（Windows .exe）](https://github.com/xkqin/awaylock/releases/download/v1.0.2/AwayLock-Setup-1.0.2-win-x64.exe)
+
+也可以进入 **[GitHub Releases 发布页](https://github.com/xkqin/awaylock/releases/latest)**，展开页面下方的 **Assets（附件）**，选择 **AwayLock-Setup-1.0.2-win-x64.exe**。
+
+**不要误下 Source code (zip) 或 Source code (tar.gz)，它们是开发者用的源码。**
+
+### 安装后这样使用
+
+1. 下载 `AwayLock-Setup-1.0.2-win-x64.exe`，双击安装。安装包自带所需运行环境。
 2. 在 Windows 蓝牙设置中完成手机配对。
 3. 打开 AwayLock，选择这部手机，点击“启用离身锁屏”。
 4. 等待界面显示“手机已连接，离身锁屏已就绪”。
