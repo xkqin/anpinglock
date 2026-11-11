@@ -1,10 +1,10 @@
 param([int]$Seconds = 60, [string]$OutputPath)
 $ErrorActionPreference = 'Stop'
-if (-not ('AwayLockResourceIo' -as [type])) {
+if (-not ('AnpingLockResourceIo' -as [type])) {
     Add-Type -TypeDefinition @'
 using System;
 using System.Runtime.InteropServices;
-public static class AwayLockResourceIo {
+public static class AnpingLockResourceIo {
     [StructLayout(LayoutKind.Sequential)]
     public struct Counts { public ulong ReadOperations, WriteOperations, OtherOperations, ReadBytes, WriteBytes, OtherBytes; }
     [DllImport("kernel32.dll", SetLastError=true)]
@@ -12,13 +12,13 @@ public static class AwayLockResourceIo {
 }
 '@
 }
-$agent = Get-Process -Name AwayLock.Agent
+$agent = Get-Process -Name AnpingLock.Agent
 $started = [DateTimeOffset]::Now
 $cpu = $agent.TotalProcessorTime.TotalMilliseconds
-$initialIo = New-Object AwayLockResourceIo+Counts
-if (-not [AwayLockResourceIo]::GetProcessIoCounters($agent.Handle, [ref]$initialIo)) { throw 'Cannot read process IO counters' }
+$initialIo = New-Object AnpingLockResourceIo+Counts
+if (-not [AnpingLockResourceIo]::GetProcessIoCounters($agent.Handle, [ref]$initialIo)) { throw 'Cannot read process IO counters' }
 $samples = @()
-$statePath = Join-Path $env:LOCALAPPDATA 'AwayLock\agent-state.json'
+$statePath = Join-Path $env:LOCALAPPDATA 'AnpingLock\agent-state.json'
 do {
     $agent.Refresh()
     if ($agent.HasExited) { throw 'Agent exited during measurement' }
@@ -33,8 +33,8 @@ do {
     Start-Sleep -Seconds 2
 } while (([DateTimeOffset]::Now - $started).TotalSeconds -lt $Seconds)
 $agent.Refresh()
-$finalIo = New-Object AwayLockResourceIo+Counts
-if (-not [AwayLockResourceIo]::GetProcessIoCounters($agent.Handle, [ref]$finalIo)) { throw 'Cannot read process IO counters' }
+$finalIo = New-Object AnpingLockResourceIo+Counts
+if (-not [AnpingLockResourceIo]::GetProcessIoCounters($agent.Handle, [ref]$finalIo)) { throw 'Cannot read process IO counters' }
 $elapsed = ([DateTimeOffset]::Now - $started).TotalSeconds
 $cpuMilliseconds = $agent.TotalProcessorTime.TotalMilliseconds - $cpu
 $result = [pscustomobject]@{

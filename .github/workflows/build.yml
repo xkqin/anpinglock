@@ -17,7 +17,7 @@ jobs:
         run: ./scripts/build.ps1
       - uses: actions/upload-artifact@v4
         with:
-          name: AwayLock-windows-x64
+          name: AnpingLock-windows-x64
           path: |
-            artifacts/AwayLock-Setup-*.exe
+            artifacts/AnpingLock-Setup-*.exe
             artifacts/SHA256SUMS.txt

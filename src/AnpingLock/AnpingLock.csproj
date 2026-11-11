@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <ApplicationIcon>Assets\AnpingLock.ico</ApplicationIcon>
+    <Version>1.1.0</Version>
+    <AssemblyName>AnpingLock</AssemblyName>
+    <Product>AnpingLock</Product>
+    <Description>Windows Bluetooth phone connection monitor</Description>
+    <Company>Xukun Qin</Company>
+    <Copyright>Copyright © 2026 Xukun Qin</Copyright>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Assets\AnpingLock.ico" />
+    <ProjectReference Include="..\AnpingLock.Core\AnpingLock.Core.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,48 +1,48 @@
-# AwayLock · 离身锁
+# AnpingLock · 离身锁
 
 ## Stepped away, then remembered you forgot to lock your PC?
 
-AwayLock helps with the lock-screen step that is easy to forget. Take your phone with you: confirmed Bluetooth disconnection and 60 seconds without keyboard or mouse input allow it to lock Windows. Closing the interface keeps the lightweight background agent running.
+AnpingLock helps with the lock-screen step that is easy to forget. Take your phone with you: confirmed Bluetooth disconnection and 60 seconds without keyboard or mouse input allow it to lock Windows. Closing the interface keeps the lightweight background agent running.
 
-[![Download the Windows installer · v1.0.2](docs/assets/download-windows.en.svg)](https://github.com/xkqin/awaylock/releases/download/v1.0.2/AwayLock-Setup-1.0.2-win-x64.exe)
+[![Download the Windows installer · v1.1.0](docs/assets/download-windows.en.svg)](https://github.com/xkqin/anpinglock/releases/download/v1.1.0/AnpingLock-Setup-1.1.0-win-x64.exe)
 
-**Download `AwayLock-Setup-1.0.2-win-x64.exe`. The “Source code” ZIP/TAR files are for developers.**
+**Download `AnpingLock-Setup-1.1.0-win-x64.exe`. The “Source code” ZIP/TAR files are for developers.**
 
 ![An unoccupied desk in a real office](docs/assets/office-workstation.jpg)
 
 <sub>Workplace photograph: [Mikhail Nilov / Pexels](https://www.pexels.com/photo/a-computer-on-an-office-desk-8297861/). Illustrative scene; [image credits](docs/assets/PHOTO_CREDITS.md).</sub>
 
-[简体中文](README.md) · [Download for Windows](https://github.com/xkqin/awaylock/releases/latest) · [Report an issue](https://github.com/xkqin/awaylock/issues)
+[简体中文](README.md) · [Download for Windows](https://github.com/xkqin/anpinglock/releases/latest) · [Report an issue](https://github.com/xkqin/anpinglock/issues)
 
-AwayLock locks your Windows session after your selected phone has stayed disconnected from Bluetooth for 60 seconds and your PC has received no keyboard or mouse input for 60 seconds. Input restarts confirmation; unavailable Bluetooth or idle information pauses locking. Start protection once, then close the window or exit its tray menu. A separate background agent continues working.
+AnpingLock locks your Windows session after your selected phone has stayed disconnected from Bluetooth for 60 seconds and your PC has received no keyboard or mouse input for 60 seconds. Input restarts confirmation; unavailable Bluetooth or idle information pauses locking. Start protection once, then close the window or exit its tray menu. A separate background agent continues working.
 
-## Actual v1.0.2 interface
+## Actual v1.1.0 interface
 
 Choose a paired phone, enable protection, and wait until it is connected and armed.
 
-![AwayLock v1.0.2 interface](docs/assets/interface.en.png)
+![AnpingLock v1.1.0 interface](docs/assets/interface.en.png)
 
 Click any image to view it at full size.
 
 ## Where to download and how to install
 
-**[Download the installer directly](https://github.com/xkqin/awaylock/releases/download/v1.0.2/AwayLock-Setup-1.0.2-win-x64.exe)** · [Releases page](https://github.com/xkqin/awaylock/releases/latest)
+**[Download the installer directly](https://github.com/xkqin/anpinglock/releases/download/v1.1.0/AnpingLock-Setup-1.1.0-win-x64.exe)** · [Releases page](https://github.com/xkqin/anpinglock/releases/latest)
 
 On the release page, expand **Assets** and choose the **.exe** file. It includes the required runtime; no source build is needed.
 
-1. Download `AwayLock-Setup-1.0.2-win-x64.exe` from Releases.
+1. Download `AnpingLock-Setup-1.1.0-win-x64.exe` from Releases.
 2. Run the installer. It installs for your Windows account and includes the .NET runtime.
 3. Pair your phone in Windows Bluetooth settings.
-4. Open AwayLock, select the paired phone, and choose **Enable phone-away lock**.
+4. Open AnpingLock, select the paired phone, and choose **Enable phone-away lock**.
 5. Wait for **Phone connected. Auto-lock armed.** before testing it.
 
-[Download v1.0.2](https://github.com/xkqin/awaylock/releases/download/v1.0.2/AwayLock-Setup-1.0.2-win-x64.exe)
+[Download v1.1.0](https://github.com/xkqin/anpinglock/releases/download/v1.1.0/AnpingLock-Setup-1.1.0-win-x64.exe)
 
 Windows 10 version 2004 or later and Windows 11, x64. This release has an unsigned installer. Release assets include SHA-256 checksums.
 
 ## Low-resource background
 
-Closing the interface leaves one native agent. On the development computer, it used approximately **14 MiB resident memory** and **2.1–2.4 MiB private memory**, including a Bluetooth-query probe. In 60-second locked-idle samples, it consumed 0–15.625 ms of CPU time and wrote 686 bytes of heartbeat payload. Stable heartbeats run every 30 seconds; connection, session and settings events wake the agent when needed. These are measured examples, not hard limits, and an open WPF dashboard uses additional memory. [Validation and measurement conditions](docs/validation.md).
+Closing the interface leaves one native agent. On the development computer, v1.1.0 used approximately **18 MiB resident memory** and **3.5 MiB private memory**. A 30-second sample including Bluetooth connection changes consumed about 47 ms of CPU time and wrote about 1 KiB of heartbeat payload. Stable heartbeats run every 30 seconds; connection, session and settings events wake the agent when needed. These are measured examples, not hard limits, and an open WPF dashboard uses additional memory. [Validation and measurement conditions](docs/validation.md).
 
 ## What happens when I exit?
 
@@ -56,11 +56,11 @@ Closing the interface leaves one native agent. On the development computer, it u
 | Background agent ends unexpectedly | Windows Task Scheduler starts it again, normally within about a minute. |
 | Uninstall | The background task and current application settings are removed. |
 
-Open AwayLock again to check the state, change the phone, or stop protection.
+Open AnpingLock again to check the state, change the phone, or stop protection.
 
 ## How it works
 
-AwayLock has two processes. `AwayLock.exe` is the on-demand .NET/WPF interface. `AwayLock.Agent.exe` is a small native C++ process owning the Bluetooth device, absence timer, and Windows lock request. Closing the interface releases its runtime and leaves only the native agent, which does not load a CLR or forms runtime.
+AnpingLock has two processes. `AnpingLock.exe` is the on-demand .NET/WPF interface. `AnpingLock.Agent.exe` is a small native C++ process owning the Bluetooth device, absence timer, and Windows lock request. Closing the interface releases its runtime and leaves only the native agent, which does not load a CLR or forms runtime.
 
 ```mermaid
 flowchart LR
@@ -79,7 +79,7 @@ The agent responds to `ConnectionStatusChanged` events. Stable connections other
 
 An observed connection arms protection. A subsequent confirmed disconnection starts a 60-second confirmation period. Reconnecting clears that timer. Keyboard or mouse input restarts confirmation, and the PC must remain idle for 60 seconds. A query timeout, error, unpaired device or unavailable idle reading clears the countdown instead of counting as absence. Fresh connection and idle observations are checked again immediately before the Windows `LockWorkStation` request. Windows Hello, PIN, or password provides sign-in afterward.
 
-After a Windows unlock, AwayLock waits for a fresh phone connection before arming again. Agent crash recovery can restore an armed countdown from a recent heartbeat belonging to the same Windows logon session. A monotonic clock tracks the active countdown.
+After a Windows unlock, AnpingLock waits for a fresh phone connection before arming again. Agent crash recovery can restore an armed countdown from a recent heartbeat belonging to the same Windows logon session. A monotonic clock tracks the active countdown.
 
 The scheduled task runs in the current user's interactive session. It has sign-in and unlock triggers, failure recovery, and a one-minute repeating watchdog. A per-user mutex keeps one agent instance active. **Stop protection** saves the disabled state before removing that task, and the lock path checks the saved state again before requesting a lock.
 
@@ -89,7 +89,7 @@ See the source files in [the implementation guide](docs/architecture.md).
 
 Bluetooth disconnection is the presence signal. Its range and timing depend on the phone, adapter, drivers, walls, and interference. A nearby phone can also disconnect because of its power-saving or Bluetooth profile policy; connection state is not a distance measurement. Recent keyboard or mouse input postpones locking. The confirmation period starts when Windows reports the disconnection. Polling and Bluetooth requests can add latency.
 
-Windows Dynamic Lock is a separate Windows feature available in Sign-in options. AwayLock makes its own lock request. With both enabled, Windows can also lock according to its own Dynamic Lock rules. The screenshots below show Windows' paired-phone status and Dynamic Lock settings.
+Windows Dynamic Lock is a separate Windows feature available in Sign-in options. AnpingLock makes its own lock request. With both enabled, Windows can also lock according to its own Dynamic Lock rules. The screenshots below show Windows' paired-phone status and Dynamic Lock settings.
 
 ![Windows reports a connected phone](docs/assets/windows-bluetooth-connected.png)
 
@@ -104,7 +104,7 @@ Microsoft documents the APIs and Windows feature used here. [Bluetooth connectio
 
 ## Local data
 
-Preferences are stored in `%LOCALAPPDATA%\AwayLock\settings.json`. They contain the selected Bluetooth address and display name, enable flag, and interface language. Settings are cached, with a named event for changes and a one-minute fallback read. `agent-state.json` holds the heartbeat, connection state and idle seconds, updated every 30 seconds while stable and immediately on state changes. `agent-events.jsonl` records lock requests and errors with one rotated file after 1 MiB; normal Bluetooth fluctuations do not append logs. A startup error can produce `agent-error.log`. The interface keeps its recent activity list in memory.
+Preferences are stored in `%LOCALAPPDATA%\AnpingLock\settings.json`. They contain the selected Bluetooth address and display name, enable flag, and interface language. Settings are cached, with a named event for changes and a one-minute fallback read. `agent-state.json` holds the heartbeat, connection state and idle seconds, updated every 30 seconds while stable and immediately on state changes. `agent-events.jsonl` records lock requests and errors with one rotated file after 1 MiB; normal Bluetooth fluctuations do not append logs. A startup error can produce `agent-error.log`. The interface keeps its recent activity list in memory.
 
 Bluetooth queries, task registration, state files, and lock requests run locally.
 
@@ -119,14 +119,14 @@ On Windows, install the .NET 8 SDK, CMake, Visual Studio 2022 C++ Build Tools an
 The script runs managed policy checks and native/reference parity checks, builds the native x64 agent, publishes the self-contained interface, and builds the installer. It downloads a pinned, checksum-verified Inno Setup compiler package when needed. Outputs are written under `artifacts/`. Run `./scripts/measure-agent.ps1 -Seconds 60` to measure CPU, memory and IO for an installed agent.
 
 ```powershell
-dotnet run --project tests/AwayLock.PolicyTests -c Release
+dotnet run --project tests/AnpingLock.PolicyTests -c Release
 ./scripts/build.ps1 -SkipInstaller
 ```
 
 Developers can export a clean interface preview from a built executable.
 
 ```powershell
-./artifacts/distribution/AwayLock.exe --render-preview interface.png --english
+./artifacts/distribution/AnpingLock.exe --render-preview interface.png --english
 ```
 
 ## Validation

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="112" viewBox="0 0 720 112" role="img" aria-labelledby="title desc">
-  <title id="title">Download the Windows installer · AwayLock v1.0.2</title>
+  <title id="title">Download the Windows installer · AnpingLock v1.1.0</title>
   <desc id="desc">Direct download of the exe installer for Windows 10 and Windows 11 x64.</desc>
   <rect width="720" height="112" rx="14" fill="#0969da"/>
   <g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
@@ -7,7 +7,7 @@
   </g>
   <g fill="#fff" font-family="Segoe UI,Arial,sans-serif">
     <text x="105" y="49" font-size="30" font-weight="700">Download for Windows</text>
-    <text x="106" y="80" font-size="18">v1.0.2 · Windows 10 / 11 · x64 · .exe installer</text>
+    <text x="106" y="80" font-size="18">v1.1.0 · Windows 10 / 11 · x64 · .exe installer</text>
   </g>
   <path d="m664 47 9 9-9 9" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

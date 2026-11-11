@@ -1,6 +1,6 @@
 # Third-party components
 
-AwayLock application source uses the MIT license in the repository root.
+AnpingLock application source uses the MIT license in the repository root.
 
 ## .NET and Windows projections
 
@@ -16,4 +16,4 @@ The installer is built with Inno Setup 6.7.3 through the checksum-pinned `Tools.
 
 ## Visuals
 
-The Windows Bluetooth and Dynamic Lock screenshots were supplied for this project with device names redacted. Interface previews are rendered from the actual v1.0.2 WPF layout with an unselected device. The office photograph is by Mikhail Nilov, sourced from [Pexels photo 8297861](https://www.pexels.com/photo/a-computer-on-an-office-desk-8297861/) under the [Pexels License](https://www.pexels.com/license/). [Detailed image credits](docs/assets/PHOTO_CREDITS.md). Earlier promotional artwork is retained in `docs/assets/` but is not used on the current README or release page.
+The Windows Bluetooth and Dynamic Lock screenshots were supplied for this project with device names redacted. Interface previews are rendered from the actual v1.1.0 WPF layout with an unselected device. The office photograph is by Mikhail Nilov, sourced from [Pexels photo 8297861](https://www.pexels.com/photo/a-computer-on-an-office-desk-8297861/) under the [Pexels License](https://www.pexels.com/license/). [Detailed image credits](docs/assets/PHOTO_CREDITS.md). Current documentation uses workplace photography and actual interface exports.
