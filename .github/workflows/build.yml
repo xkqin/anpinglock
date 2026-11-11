@@ -1,0 +1,23 @@
+name: Windows build
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Build and package
+        shell: pwsh
+        run: ./scripts/build.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AwayLock-windows-x64
+          path: |
+            artifacts/AwayLock-Setup-*.exe
+            artifacts/SHA256SUMS.txt

@@ -1,0 +1,11 @@
+**/bin/
+**/obj/
+.vs/
+.tools/
+artifacts/
+*.user
+*.suo
+*.log
+settings.json
+status.json
+test-results/
